@@ -58,13 +58,13 @@ export enum AccountStatus {
 @Entity()
 export class User {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id!: string;
 
   @Column({ unique: true })
-  email: string;
+  email?: string;
 
   @Column()
-  password: string;
+  password?: string;
 
   @Column({ nullable: true })
   firstName?: string;
@@ -98,7 +98,7 @@ export class User {
     enum: LeadStatus,
     default: LeadStatus.NEW,
   })
-  leadStatus: LeadStatus;
+  leadStatus!: LeadStatus;
 
   @Column({ nullable: true })
   leadSource?: string;
@@ -109,14 +109,14 @@ export class User {
     enum: CustomerType,
     default: CustomerType.LEAD,
   })
-  customerType: CustomerType;
+  customerType!: CustomerType;
 
   @Column({
     type: 'enum',
     enum: PreferredContactMethod,
     default: PreferredContactMethod.EMAIL,
   })
-  preferredContactMethod: PreferredContactMethod;
+  preferredContactMethod!: PreferredContactMethod;
 
   @Column({ nullable: true })
   ownerName?: string;
@@ -127,14 +127,14 @@ export class User {
     enum: UserRole,
     default: UserRole.USER,
   })
-  role: UserRole;
+  role!: UserRole;
 
   @Column({
     type: 'enum',
     enum: AccessScope,
     default: AccessScope.SELF,
   })
-  accessScope: AccessScope;
+  accessScope!: AccessScope;
 
   @Column('simple-array', { nullable: true })
   permissions?: string[];
@@ -145,16 +145,16 @@ export class User {
     enum: AccountStatus,
     default: AccountStatus.PENDING,
   })
-  accountStatus: AccountStatus;
+  accountStatus!: AccountStatus;
 
   @Column({ default: true })
-  canLogin: boolean;
+  canLogin!: boolean;
 
   @Column({ type: 'timestamp', nullable: true })
   lastPasswordChangedAt?: Date;
 
   @Column({ type: 'int', default: 0 })
-  failedLoginAttempts: number;
+  failedLoginAttempts!: number;
 
   @Column({ type: 'timestamp', nullable: true })
   lockedUntil?: Date;
@@ -199,13 +199,13 @@ export class User {
   emailVerifiedAt?: Date;
 
   @Column({ default: true })
-  isActive: boolean;
+  isActive!: boolean;
 
   @CreateDateColumn()
-  createdAt: Date;
+  createdAt!: Date;
 
   @UpdateDateColumn()
-  updatedAt: Date;
+  updatedAt!: Date;
 
   @DeleteDateColumn()
   deletedAt?: Date;

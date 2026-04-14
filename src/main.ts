@@ -7,10 +7,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalInterceptors(new TryCatchInterceptor());
-  app.useGlobalPipes(new ValidationPipe({
-    whitelist: true,
-    transform: true,
-  }));
+  app.useGlobalPipes(new ValidationPipe());
 
   const config = new DocumentBuilder()
     .setTitle('Prototype')
@@ -22,6 +19,7 @@ async function bootstrap() {
   SwaggerModule.setup('api-docs', app, documentFactory);
 
   await app.listen(process.env.PORT ?? 3000);
-  Logger.log(`🚀 Server Running on Port --> http://localhost:${process.env.PORT ?? 3000}/api-docs`)
+  Logger.log(`🚀 Swagger Running on Path --> http://localhost:${process.env.PORT ?? 3000}/api-docs`)
+  Logger.log(`🚀 GrapghQL Running on Path --> http://localhost:${process.env.PORT ?? 3000}/graphql`)
 }
 bootstrap();
